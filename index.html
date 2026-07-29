@@ -13,111 +13,178 @@
       color: #333;
       line-height: 1.6;
     }
-    header {
+
+    /* 전체 레이아웃을 감싸는 컨테이너 */
+    .layout-container {
+      display: flex;
+      max-width: 1200px;
+      margin: 40px auto;
+      gap: 40px; /* 좌우 단 사이의 간격 */
+      padding: 0 20px;
+    }
+
+    /* 좌측 사이드바 (프로필) */
+    .sidebar {
+      flex: 0 0 300px; /* 고정 너비 300px */
       background: #333;
       color: white;
-      padding: 60px 20px;
+      padding: 40px 20px;
+      border-radius: 14px;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      /* 스크롤 시 사이드바가 화면에 고정되게 하는 효과 */
+      position: sticky;
+      top: 40px;
+      height: max-content;
     }
-    header img {
-      width: 260px;
-      height: 260px;
+
+    .sidebar img {
+      width: 220px;
+      height: 220px;
       object-fit: cover;
       border-radius: 50%;
       margin-bottom: 15px;
       border: 4px solid #575757;
     }
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
+
+    .sidebar h1 {
+      margin: 10px 0;
+      font-size: 1.8rem;
+    }
+
+    .sidebar p {
+      color: #ccc;
+      margin-bottom: 0;
+    }
+
+    /* 우측 메인 컨텐츠 (연구, 학력 등) */
+    .main-content {
+      flex: 1; /* 남은 공간을 모두 차지 */
       background: white;
       padding: 40px;
       border-radius: 14px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     }
+
     h2 {
-      margin-top: 40px;
+      margin-top: 0;
       border-bottom: 2px solid #575757;
       padding-bottom: 6px;
       color: #333;
       letter-spacing: 0.5px;
     }
+    
+    .main-content section {
+      margin-bottom: 40px; /* 각 섹션 간의 간격 */
+    }
+
     ul {
       padding-left: 20px;
+    }
+
+    /* 모바일 화면(너비 768px 이하)을 위한 반응형 디자인 */
+    @media (max-width: 768px) {
+      .layout-container {
+        flex-direction: column; /* 세로로 배치 */
+      }
+      .sidebar {
+        position: static; /* 고정 해제 */
+        width: auto;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="profile1_after_unit.jpg" alt="Profile Photo" class="profile-square" />
-    <h1>Chanyoung Kim</h1>
-    <p>chan00young@kaist.ac.kr</p>
-  </header>
+  <div class="layout-container">
+    
+    <!-- 좌측 사이드바 -->
+    <aside class="sidebar">
+      <img src="profile1_after_unit.jpg" alt="Profile Photo" />
+      <h1>Chanyoung Kim</h1>
+      <p>chan00young@kaist.ac.kr</p>
+    </aside>
 
-  <div class="container">
-    <h2>Research Interest</h2>
-    <p>I am broadly interested in <i>applying mathematical approaches to pioneering engineering challenges</i> of the future.</p>
-    <ul>
-      <li><b>Personalized AI, Generative Models, Scientific Computing, Quantum Machine Learning</b></li>
-    </ul>
-
-    <h2>Computational Skills</h2>
-    <ul>
-      <li>Programming Languages: Python (PyTorch, JAX), Linux, MATLAB</li>
-    </ul>
-
-    <h2>Education</h2>
-    <ul>
-      <li><b>M.S., KAIST</b>, Daejeon, Korea (Feb. 2024 - Now)
+    <!-- 우측 메인 컨텐츠 -->
+    <main class="main-content">
+      
+      <section>
+        <h2>Research Interest</h2>
+        <p>I am broadly interested in <i>applying mathematical approaches to pioneering engineering challenges</i> of the future.</p>
         <ul>
-          <li>Major: Mathematical Sciences / Minor: Graduate School of Data Science</li>
-          <li>Advisor: Youngjoon Hong (SNU) / Wooseok Ha (KAIST)</li>
+          <li><b>Personalized AI, Generative Models, Scientific Computing, Quantum Machine Learning</b></li>
         </ul>
-      </li>
-      <li><b>B.S., Sungkyunkwan University</b>, Suwon, Korea (Feb. 2020 - Feb. 2024)
+      </section>
+
+      <section>
+        <h2>Computational Skills</h2>
         <ul>
-          <li>Major: Mathematics (GPA: 4.12/4.5)</li>
+          <li>Programming Languages: Python (PyTorch, JAX), Linux, MATLAB</li>
         </ul>
-      </li>
-    </ul>
+      </section>
 
-    <h2>Publications</h2>
-    <p><b>Under review:</b></p>
-    <ul>
-      <li>One submitted QML4PDE manuscript (under double-blind review)</li>
-    </ul>
-    <p><b>Accepted:</b></p>
-    <ul>
-      <li>Kim, N., Lee, D., <u>Kim, C.</u> et al. <i>Simple arithmetic operation in latent space can generate a novel three-dimensional graph metamaterials</i>. npj Comput Mater 10, 236 (2024).</li>
-    </ul>
-    <p>*: equal contribution</p>
-
-    <h2>Teaching Experience</h2>
-    <ul>
-      <li>2025 KMS-NIMS Artificial Intelligence Summer School (TA)</li>
-      <li>2025 YMC Teaching Assistant</li>
-      <li>KAIST TA Scholarships
+      <section>
+        <h2>Education</h2>
         <ul>
-          <li>HPC Administrator (Fall 2024 - Spring 2026)</li>
-          <li>MAS110: Linear Algebra for Data Science (Fall 2024)</li>
-          <li>MAS250: Probability and Statistics (Spring 2024)</li>
+          <li><b>M.S., KAIST</b>, Daejeon, Korea (Feb. 2024 - Now)
+            <ul>
+              <li>Major: Mathematical Sciences / Minor: Graduate School of Data Science</li>
+              <li>Advisor: Youngjoon Hong (SNU) / Wooseok Ha (KAIST)</li>
+            </ul>
+          </li>
+          <li><b>B.S., Sungkyunkwan University</b>, Suwon, Korea (Feb. 2020 - Feb. 2024)
+            <ul>
+              <li>Major: Mathematics (GPA: 4.12/4.5)</li>
+            </ul>
+          </li>
         </ul>
-      </li>
-    </ul>
+      </section>
 
-    <h2>Presentations</h2>
-    <ul>
-      <li>2025 Quantum Techniques in Machine Learning (Poster, scheduled)</li>
-      <li>2025 KAIST Math Graduate Student Seminar (Oral)</li>
-      <li>2024 KSIAM Spring Conference (Poster)</li>
-    </ul>
+      <section>
+        <h2>Publications</h2>
+        <p><b>Under review:</b></p>
+        <ul>
+          <li>One submitted QML4PDE manuscript (under double-blind review)</li>
+        </ul>
+        <p><b>Accepted:</b></p>
+        <ul>
+          <li>Kim, N., Lee, D., <u>Kim, C.</u> et al. <i>Simple arithmetic operation in latent space can generate a novel three-dimensional graph metamaterials</i>. npj Comput Mater 10, 236 (2024).</li>
+        </ul>
+        <p>*: equal contribution</p>
+      </section>
 
-    <h2>Grants and Scholarships</h2>
-    <ul>
-      <li>2024 NRF Next Generation Researchers Support Program (Sept. 2024 - Aug. 2025)</li>
-      <li>Government-Funded TA Scholarships, KAIST (Feb. 2024 - Now)</li>
-    </ul>
+      <section>
+        <h2>Teaching Experience</h2>
+        <ul>
+          <li>2025 KMS-NIMS Artificial Intelligence Summer School (TA)</li>
+          <li>2025 YMC Teaching Assistant</li>
+          <li>KAIST TA Scholarships
+            <ul>
+              <li>HPC Administrator (Fall 2024 - Spring 2026)</li>
+              <li>MAS110: Linear Algebra for Data Science (Fall 2024)</li>
+              <li>MAS250: Probability and Statistics (Spring 2024)</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Presentations</h2>
+        <ul>
+          <li>2025 Quantum Techniques in Machine Learning (Poster, scheduled)</li>
+          <li>2025 KAIST Math Graduate Student Seminar (Oral)</li>
+          <li>2024 KSIAM Spring Conference (Poster)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Grants and Scholarships</h2>
+        <ul>
+          <li>2024 NRF Next Generation Researchers Support Program (Sept. 2024 - Aug. 2025)</li>
+          <li>Government-Funded TA Scholarships, KAIST (Feb. 2024 - Now)</li>
+        </ul>
+      </section>
+
+    </main>
   </div>
 </body>
 </html>
