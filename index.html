@@ -5,46 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chanyoung Kim | Homepage</title>
   <style>
+    * {
+    box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f5f5f5;
-      color: #333;
-      line-height: 1.6;
+      background: #575757;
+      color: #242424;
+      line-height: 1.8;
     }
 
-    /* 전체 레이아웃을 감싸는 컨테이너 */
+    /* 1. 레이아웃 뼈대: 화면 전체(100%)를 꽉 채웁니다 */
     .layout-container {
       display: flex;
-      max-width: 1200px;
-      margin: 40px auto;
-      gap: 40px; /* 좌우 단 사이의 간격 */
-      padding: 0 20px;
+      width: 100%; 
+      margin: 0;
+      gap: 0px;
     }
 
-    /* 좌측 사이드바 (프로필) */
+    /* 2. 사이드바: 왼쪽 벽에 완전히 밀착 */
     .sidebar {
-      flex: 0 0 300px; /* 고정 너비 300px */
+      flex: 0 0 340px; /* 화면 좌측에 붙일 때는 370px보다 살짝 얇은 340px 정도가 비율이 예쁩니다 */
       background: #333;
       color: white;
-      padding: 40px 20px;
-      border-radius: 14px;
+      padding: 60px 20px 40px 20px;
       text-align: center;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-      /* 스크롤 시 사이드바가 화면에 고정되게 하는 효과 */
       position: sticky;
-      top: 40px;
-      height: max-content;
+      top: 0;
+      height: 100vh;
+      align-self: flex-start;
+      border-radius: 0;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 10px 0 15px rgba(0, 0, 0, 0.25);
+      z-index: 10;
     }
 
+    /* 3. 오른쪽 메인 공간: 나머지 화면을 다 차지하되, 내부 내용물을 가운데로 정렬 */
+    .main-content {
+      flex: 1;
+      background: #ffffff; /* 우측 전체 배경을 깔끔한 흰색으로 설정 */
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+    }
+
+    /* 4. 글자가 써지는 실제 공간 제한 (가독성 최적화) */
+    .main-content section {
+      width: 100%;
+      max-width: 1000px; /* 💡 이 숫자를 넘어가면 더 이상 넓어지지 않습니다 (가장 읽기 좋은 폭) */
+    }
+
+
     .sidebar img {
-      width: 220px;
-      height: 220px;
+      width: 250px;
+      height: 250px;
       object-fit: cover;
-      border-radius: 50%;
+      border-radius: 8%;
       margin-bottom: 15px;
-      border: 4px solid #575757;
+      border: 0.5px solid #575757;
     }
 
     .sidebar h1 {
@@ -53,33 +78,124 @@
     }
 
     .sidebar p {
+      margin-top: auto; /* 빈 공간을 밀어내어 이메일과 버튼을 바닥으로 보냄 */
+      margin-bottom: 5px; /* 버튼과의 간격을 살짝 좁힘 */
+      font-size: 0.95rem;
       color: #ccc;
-      margin-bottom: 0;
     }
 
-    /* 우측 메인 컨텐츠 (연구, 학력 등) */
-    .main-content {
-      flex: 1; /* 남은 공간을 모두 차지 */
-      background: white;
-      padding: 40px;
-      border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    .sidebar-links {
+      margin-top: 15px; 
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .sidebar-links a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: white;
+      background: #575757;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      transition: background 0.2s ease;
+    }
+
+    .sidebar-links a:hover {
+      background: #7a7a7a;
+    }
+
+    .sidebar-links a svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
     h2 {
       margin-top: 0;
       border-bottom: 2px solid #575757;
-      padding-bottom: 6px;
+      padding-bottom: 0px;
       color: #333;
       letter-spacing: 0.5px;
     }
     
     .main-content section {
-      margin-bottom: 40px; /* 각 섹션 간의 간격 */
+      margin-bottom: 0px; /* 각 섹션 간의 간격 */
     }
 
     ul {
       padding-left: 20px;
+    }
+
+    /* -------------------------------------
+       사이드바 Education 디자인 (아이콘 + 3단 텍스트)
+       ------------------------------------- */
+    .sidebar-education {
+    width: fit-content;
+      text-align: left;
+      padding-top: 30px;
+    }
+
+    .sidebar-education h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }
+
+    /* 아이콘과 텍스트 묶음을 가로로 나란히 배치 */
+    .edu-item {
+      display: flex;
+      align-items: flex-start; /* 아이콘을 텍스트 첫 줄(위쪽)에 딱 맞춤 */
+      gap: 12px; /* 아이콘과 글자 사이의 간격 */
+      margin-bottom: 22px; /* 각 학교 덩어리 사이의 간격 */
+    }
+
+    /* 학사모 아이콘 영역 */
+    .edu-icon {
+      flex-shrink: 0; /* 글자가 길어져도 아이콘이 찌그러지지 않게 보호 */
+      width: 18px;
+      height: 18px;
+      margin-top: 2px; /* 텍스트 첫 줄(진한 글씨)과 높이를 미세하게 맞춤 */
+    }
+    
+    .edu-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: #bbbbbb; /* 아이콘 색상 (너무 튀지 않게 살짝 연한 회색) */
+    }
+
+    /* 텍스트 3줄 세로 배치 */
+    .edu-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px; /* 1, 2, 3줄 사이의 간격 */
+    }
+
+    /* 1줄: 학위 (가장 진하게, 흰색) */
+    .edu-degree {
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: #ffffff;
+    }
+
+    /* 2줄: 학교명 (중간 밝기의 회색) */
+    .edu-univ {
+      font-size: 0.85rem;
+      color: #cccccc;
+    }
+
+    /* 3줄: 기간 (가장 연하고 작게, 어두운 회색) */
+    .edu-date {
+      font-size: 0.8rem;
+      color: #999999;
     }
 
     /* 모바일 화면(너비 768px 이하)을 위한 반응형 디자인 */
@@ -97,41 +213,110 @@
 <body>
   <div class="layout-container">
     
-    <!-- 좌측 사이드바 -->
     <aside class="sidebar">
       <img src="profile1_after_unit.jpg" alt="Profile Photo" />
       <h1>Chanyoung Kim</h1>
-      <p>chan00young@kaist.ac.kr</p>
+      
+
+      <div class="sidebar-education">
+        
+        <!-- 1. 박사 과정 -->
+        <div class="edu-item">
+          <div class="edu-icon">
+            <!-- 학사모 SVG 아이콘 -->
+            <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+              <path d="M320 32l320 128-320 128L0 160 320 32zm0 304L128 252v120c0 38 78 76 192 76s192-38 192-76V252L320 336z"/>
+            </svg>
+          </div>
+          <div class="edu-text">
+            <div class="edu-degree">Ph.D. in Artificial Intelligence</div>
+            <div class="edu-univ">Seoul National University (SNU)</div>
+            <div class="edu-date">Incoming, Fall 2026</div>
+          </div>
+        </div>
+
+        <!-- 2. 석사 과정 -->
+        <div class="edu-item">
+          <div class="edu-icon">
+            <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+              <path d="M320 32l320 128-320 128L0 160 320 32zm0 304L128 252v120c0 38 78 76 192 76s192-38 192-76V252L320 336z"/>
+            </svg>
+          </div>
+          <div class="edu-text">
+            <div class="edu-degree">M.S. in Mathematical Sciences</div>
+            <div class="edu-univ">KAIST</div>
+            <div class="edu-date">2024 – 2026</div>
+          </div>
+        </div>
+
+        <!-- 3. 학사 과정 -->
+        <div class="edu-item">
+          <div class="edu-icon">
+            <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+              <path d="M320 32l320 128-320 128L0 160 320 32zm0 304L128 252v120c0 38 78 76 192 76s192-38 192-76V252L320 336z"/>
+            </svg>
+          </div>
+          <div class="edu-text">
+            <div class="edu-degree">B.S. in Mathematics</div>
+            <div class="edu-univ">Sungkyunkwan University</div>
+            <div class="edu-date">2020 – 2024</div>
+          </div>
+        </div>
+      </div>
+
+
+      <p>Email : chan00young@kaist.ac.kr</p>
+      <div class="sidebar-links">
+        <!-- 구글 스칼라 버튼 -->
+        <a href="https://scholar.google.co.kr/citations?user=cfI_i_kAAAAJ&hl=en" target="_blank">
+          <!-- 학사모(Scholar) SVG 아이콘 -->
+          <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M320 32l320 128-320 128L0 160 320 32zm0 304L128 252v120c0 38 78 76 192 76s192-38 192-76V252L320 336z"/>
+          </svg>
+          Scholar
+        </a>
+        
+        <!-- CV 버튼 -->
+        <a href="https://scholar.google.co.kr/citations?user=cfI_i_kAAAAJ&hl=en" target="_blank">
+          <!-- 문서(CV) SVG 아이콘 -->
+          <svg viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/>
+          </svg>
+          CV
+        </a>
+      </div>
     </aside>
 
     <!-- 우측 메인 컨텐츠 -->
     <main class="main-content">
       
       <section>
-        <h2>Research Interest</h2>
-        <p>I am broadly interested in <i>applying mathematical approaches to pioneering engineering challenges</i> of the future.</p>
+        <h2>Research Interests</h2>
+        <p>I am interested in applying <i>mathematical approaches</i> to <i>pioneering engineering challenges</i> of the future.</p>
         <ul>
-          <li><b>Personalized AI, Generative Models, Scientific Computing, Quantum Machine Learning</b></li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Computational Skills</h2>
-        <ul>
-          <li>Programming Languages: Python (PyTorch, JAX), Linux, MATLAB</li>
+          <li><b>Scientific Computing</b>: Operator Learning, PINN</li>
+          <li><b>Quantum Computing for PDEs</b>: HHL, VQLS, Quantum Machine Learning</li>
+          <li><b>Generative Models</b>: Diffusion Models, VAE</li>
+          <li><b>Personalized AI and Robotics</b></li>
         </ul>
       </section>
 
       <section>
         <h2>Education</h2>
         <ul>
-          <li><b>M.S., KAIST</b>, Daejeon, Korea (Feb. 2024 - Now)
+          <li><i>(Incoming) Ph.D., Seoul National University (SNU)</i>, Seoul, Korea
+            <ul>
+              <li>Major: Interdisciplinary Program in Artificial Intelligence (IPAI) </li>
+              <li>Advisor: Youngjoon Hong</li>
+            </ul>
+          </li>
+          <li><i>(2024-2026) M.S., KAIST</i>, Daejeon, Korea
             <ul>
               <li>Major: Mathematical Sciences / Minor: Graduate School of Data Science</li>
               <li>Advisor: Youngjoon Hong (SNU) / Wooseok Ha (KAIST)</li>
             </ul>
           </li>
-          <li><b>B.S., Sungkyunkwan University</b>, Suwon, Korea (Feb. 2020 - Feb. 2024)
+          <li><i>(2020-2024) B.S., Sungkyunkwan University</i>, Suwon, Korea
             <ul>
               <li>Major: Mathematics (GPA: 4.12/4.5)</li>
             </ul>
@@ -153,21 +338,6 @@
       </section>
 
       <section>
-        <h2>Teaching Experience</h2>
-        <ul>
-          <li>2025 KMS-NIMS Artificial Intelligence Summer School (TA)</li>
-          <li>2025 YMC Teaching Assistant</li>
-          <li>KAIST TA Scholarships
-            <ul>
-              <li>HPC Administrator (Fall 2024 - Spring 2026)</li>
-              <li>MAS110: Linear Algebra for Data Science (Fall 2024)</li>
-              <li>MAS250: Probability and Statistics (Spring 2024)</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-
-      <section>
         <h2>Presentations</h2>
         <ul>
           <li>2025 Quantum Techniques in Machine Learning (Poster, scheduled)</li>
@@ -181,6 +351,21 @@
         <ul>
           <li>2024 NRF Next Generation Researchers Support Program (Sept. 2024 - Aug. 2025)</li>
           <li>Government-Funded TA Scholarships, KAIST (Feb. 2024 - Now)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Teaching Experience</h2>
+        <ul>
+          <li>2025 KMS-NIMS Artificial Intelligence Summer School (TA)</li>
+          <li>2025 YMC Teaching Assistant</li>
+          <li>KAIST TA Scholarships
+            <ul>
+              <li>HPC Administrator (Fall 2024 - Spring 2026)</li>
+              <li>MAS110: Linear Algebra for Data Science (Fall 2024)</li>
+              <li>MAS250: Probability and Statistics (Spring 2024)</li>
+            </ul>
+          </li>
         </ul>
       </section>
 
