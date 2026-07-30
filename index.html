@@ -139,7 +139,7 @@
     .sidebar-education {
     width: fit-content;
       text-align: left;
-      padding-top: 30px;
+      padding-top: 5px;
     }
 
     .sidebar-education h3 {
@@ -154,8 +154,8 @@
     .edu-item {
       display: flex;
       align-items: flex-start; /* 아이콘을 텍스트 첫 줄(위쪽)에 딱 맞춤 */
-      gap: 12px; /* 아이콘과 글자 사이의 간격 */
-      margin-bottom: 22px; /* 각 학교 덩어리 사이의 간격 */
+      gap: 10px; /* 아이콘과 글자 사이의 간격 */
+      margin-bottom: 15px; /* 각 학교 덩어리 사이의 간격 */
     }
 
     /* 학사모 아이콘 영역 */
@@ -176,7 +176,7 @@
     .edu-text {
       display: flex;
       flex-direction: column;
-      gap: 3px; /* 1, 2, 3줄 사이의 간격 */
+      gap: 0.5px; /* 1, 2, 3줄 사이의 간격 */
     }
 
     /* 1줄: 학위 (가장 진하게, 흰색) */
@@ -198,16 +198,44 @@
       color: #999999;
     }
 
-    /* 모바일 화면(너비 768px 이하)을 위한 반응형 디자인 */
     @media (max-width: 768px) {
-      .layout-container {
-        flex-direction: column; /* 세로로 배치 */
-      }
-      .sidebar {
-        position: static; /* 고정 해제 */
-        width: auto;
-      }
-    }
+        /* 1. 세로 배치로 전환 & 좌우 여백 제거 */
+        .layout-container {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        /* 2. 사이드바: 모바일 화면 맨 위에 깔끔하게 배치 */
+        .sidebar {
+            position: static;     /* 화면 고정 해제 */
+            flex: none;           /* 데스크탑용 350px 고정 폭 해제 */
+            width: 100%;          /* 화면 가로폭을 100% 채움 */
+            height: auto;         /* 100vh 고정 해제 (내용물 높이만큼만) */
+            padding: 40px 20px;
+            box-shadow: none;     /* 모바일에서는 사이드바 그림자 제거 */
+            border-bottom: 2px solid #575757; /* 대신 메인과의 경계선 추가 */
+        }
+
+        /* 3. 모바일용 프로필 이미지 크기 조절 */
+        .sidebar img {
+            width: 180px;
+            height: 180px;
+        }
+
+        /* 4. 메인 컨텐츠: 모바일 글자 크기 및 여백 최적화 */
+        .main-content {
+            padding: 30px 20px;   /* 좌우 패딩을 줄여 글자 영역 확보 */
+        }
+
+        .main-content section {
+            max-width: 100%;      /* 글자 상자가 모바일 화면 가로폭에 딱 맞게 조절 */
+        }
+
+        /* 모바일에서 글자가 억지로 커지는 현상 방지 */
+        body {
+            -webkit-text-size-adjust: 100%;
+        }
+        }
   </style>
 </head>
 <body>
